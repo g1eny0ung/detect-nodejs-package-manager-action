@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        manager: [npm, yarn, pnpm]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect package manager
+        id: package-manager
+        uses: detect-nodejs-package-manager-action@main
+        with:
+          working-directory: ./tests/${{ matrix.manager }}
+          env-name: pm
+      - name: Install dependencies
+        run: $pm install
+        working-directory: ./tests/${{ matrix.manager }}

@@ -1,0 +1,39 @@
+name: "Detect nodejs package manager"
+description: "GitHub Action to auto-detect package manager for nodejs"
+inputs:
+  working-directory:
+    description: "Working directory"
+    required: false
+    default: "."
+  env-name:
+    description: "Set package manager to environment variable"
+    required: false
+outputs:
+  package-manager:
+    description: "Current package manager"
+    value: ${{ steps.set-package-manager.outputs.pm }}
+runs:
+  using: "composite"
+  steps:
+    - id: set-package-manager
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      run: |
+        $DETECTED_PM = ""
+
+        if [ -f "pnpm-lock.yaml" ]; then
+          $DETECTED_PM = "pnpm"
+        elif [ -f "yarn.lock" ]; then
+          $DETECTED_PM = "yarn"
+        elif [ -f "package-lock.json" ]; then
+          $DETECTED_PM = "npm"
+        else
+          echo "No lock file found. Use npm as the default package manager."
+          $DETECTED_PM = "npm"
+        fi
+
+        echo "pm=$DETECTED_PM" >> "$GITHUB_OUTPUT"
+    - name: Set environment variable
+      if: ${{ inputs.env-name != '' }}
+      shell: bash
+      run: echo "${{ inputs.env-name }}=${{ steps.set-package-manager.outputs.pm }}" >> "$GITHUB_ENV"
