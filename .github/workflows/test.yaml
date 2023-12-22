@@ -22,6 +22,11 @@ jobs:
         with:
           working-directory: ./tests/${{ matrix.manager }}
           env-name: pm
+      - uses: pnpm/action-setup@v2
+        if: ${{ matrix.manager == 'pnpm' }}
+        name: Install pnpm
+        with:
+          version: 8
       - name: Install dependencies
         run: $pm install
         working-directory: ./tests/${{ matrix.manager }}
