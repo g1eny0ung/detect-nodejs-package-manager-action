@@ -19,17 +19,17 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       shell: bash
       run: |
-        $DETECTED_PM = ""
+        DETECTED_PM=""
 
-        if [ -f "pnpm-lock.yaml" ]; then
-          $DETECTED_PM = "pnpm"
-        elif [ -f "yarn.lock" ]; then
-          $DETECTED_PM = "yarn"
-        elif [ -f "package-lock.json" ]; then
-          $DETECTED_PM = "npm"
+        if [[ -f "pnpm-lock.yaml" ]]; then
+          DETECTED_PM="pnpm"
+        elif [[ -f "yarn.lock" ]]; then
+          DETECTED_PM="yarn"
+        elif [[ -f "package-lock.json" ]]; then
+          DETECTED_PM="npm"
         else
           echo "No lock file found. Use npm as the default package manager."
-          $DETECTED_PM = "npm"
+          DETECTED_PM="npm"
         fi
 
         echo "pm=$DETECTED_PM" >> "$GITHUB_OUTPUT"
