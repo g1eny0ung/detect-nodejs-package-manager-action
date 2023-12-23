@@ -1,5 +1,8 @@
 name: "Detect nodejs package manager"
 description: "GitHub Action to auto-detect package manager for nodejs"
+branding:
+  icon: 'box'
+  color: 'gray-dark'
 inputs:
   working-directory:
     description: "Working directory"

@@ -25,8 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Detect package manager
-        id: package-manager
-        uses: g1eny0ung/detect-nodejs-package-manager-action@main
+        uses: g1eny0ung/detect-nodejs-package-manager-action@v1
         with:
           working-directory: ./tests/${{ matrix.manager }}
           env-name: pm
@@ -45,7 +44,7 @@ jobs:
 | Name                | Description                                                                                                | Required | Default |
 | ------------------- | ---------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | `working-directory` | The working directory to detect package manager                                                            | `false`  | `.`     |
-| `env-name`          | An output env variable which contains the package manager name, see [Env name](#env-name) for more details | `false`  | `""`    |
+| `env-name`          | An output env variable that contains the package manager name, see [Env name](#env-name) for more details | `false`  | `""`    |
 
 ## Env name
 
@@ -54,7 +53,7 @@ You need to specify an env name to get the package manager name. The default is 
 ```yaml
 - name: Detect package manager
   id: package-manager
-  uses: g1eny0ung/detect-nodejs-package-manager-action@main
+  uses: g1eny0ung/detect-nodejs-package-manager-action@v1
 - name: Set environment variable
   shell: bash
   run: echo "$pm=${{ steps.package-manager.outputs.pm }}" >> "$GITHUB_ENV"
