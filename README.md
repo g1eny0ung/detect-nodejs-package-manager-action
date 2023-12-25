@@ -1,5 +1,7 @@
 # detect-nodejs-package-manager-action
 
+[![Test](https://github.com/g1eny0ung/detect-nodejs-package-manager-action/actions/workflows/test.yaml/badge.svg)](https://github.com/g1eny0ung/detect-nodejs-package-manager-action/actions/workflows/test.yaml)
+
 GitHub Action to auto-detect package manager for nodejs.
 
 This action is mainly useful for action authors who want to automatically detect
@@ -41,9 +43,9 @@ jobs:
 
 ## Inputs
 
-| Name                | Description                                                                                                | Required | Default |
-| ------------------- | ---------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| `working-directory` | The working directory to detect package manager                                                            | `false`  | `.`     |
+| Name                | Description                                                                                               | Required | Default |
+| ------------------- | --------------------------------------------------------------------------------------------------------- | -------- | ------- |
+| `working-directory` | The working directory to detect package manager                                                           | `false`  | `.`     |
 | `env-name`          | An output env variable that contains the package manager name, see [Env name](#env-name) for more details | `false`  | `""`    |
 
 ## Env name
